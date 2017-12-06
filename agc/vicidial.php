@@ -7037,6 +7037,13 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 			}
 		}
 
+
+
+
+
+
+
+
 // ################################################################################
 // Request list of active manager chats for this agent
 	function InternalChatsCheck(line_code)
@@ -18123,7 +18130,13 @@ $zi=2;
 <span style="position:absolute;left:0px;top:<?php echo $DBheight ?>px;z-index:<?php $zi++; echo $zi ?>;" id="debugbottomspan"></span>
 
 <span style="position:absolute;left:300px;top:<?php echo $MBheight ?>px;z-index:<?php $zi++; echo $zi ?>;" id="DiaLlOgButtonspan">
-<span id="ManuaLDiaLButtons"><font class="body_text"><span id="MDstatusSpan"><a href="#" onclick="NeWManuaLDiaLCalL('NO','','','','','YES');return false;"><?php echo _QXZ("MANUAL DIAL"); ?></a></span>&nbsp; &nbsp; <a href="#" onclick="NeWManuaLDiaLCalL('FAST','','','','','YES');return false;"><?php echo _QXZ("FAST DIAL"); ?></a></span>&nbsp; &nbsp; </font>
+<span id="ManuaLDiaLButtons"><font class="body_text"><span id="MDstatusSpan"><a href="#" onclick="NeWManuaLDiaLCalL('NO','','','','','YES');return false;"><?php echo _QXZ("MANUAL DIAL"); ?></a></span>&nbsp; &nbsp; 
+<a href="#" onclick="NeWManuaLDiaLCalL('FAST','','','','','YES');return false;"><?php echo _QXZ("FAST DIAL"); ?></a></span>&nbsp; &nbsp; </font>
+
+<!-- ZZZZZZZZZZZZ  action links  agregado por keisi -->
+<a href="#" onclick="CallListPhone();return false;">>LIST LEAD CALL</a></span>&nbsp;&nbsp;</font>
+<!-- ZZZZZZZZZZZZ  action links  agregado por keisi fin -->
+
 <span id="CallLogButtons"><font class="body_text"><span id="CallLogLinkSpan"><a href="#" onclick="VieWCalLLoG();return false;"><?php echo _QXZ("VIEW CALL LOG"); ?></a></span><br /></font></span>
 </span>
 

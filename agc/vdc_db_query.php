@@ -14769,6 +14769,19 @@ if ($ACTION == 'CalLBacKLisT')
 	}
 
 
+/*Mestra los datos en la*/
+if ($ACTION == 'CallLisNow'){
+   if ($DB) {echo "$stmt\n";}
+   $stmt = "SELECT lead_id,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` limit 10";
+   $res = mysql_query($stmt, $link);
+	    while ($resultado = mysqli_fetch_row($res)){
+          echo "$resultado[0] ~$resultado[1] ~$resultado[2] ~$resultado[3] "
+	    }
+}
+
+
+
+
 ################################################################################
 ### CalLBacKCounT - send the count of the USERONLY callbacks for an agent
 ################################################################################
