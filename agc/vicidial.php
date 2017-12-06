@@ -7042,6 +7042,94 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 
 
 
+//################################################################################3
+//nueva funcion modificada
+function  CallListPhone()
+		{
+		var move_on=1;
+		if ( (AutoDialWaiting == 1) || (VD_live_customer_call==1) || (alt_dial_active==1) || (MD_channel_look==1) || (in_lead_preview_state==1) )
+			{
+			if ( (auto_pause_precall == 'Y') && ( (agent_pause_codes_active=='Y') || (agent_pause_codes_active=='FORCE') ) && (AutoDialWaiting == 1) && (VD_live_customer_call!=1) && (alt_dial_active!=1) && (MD_channel_look!=1) && (in_lead_preview_state!=1) )
+				{
+				agent_log_id = AutoDial_ReSume_PauSe("VDADpause",'','','','','1',auto_pause_precall_code);
+				}
+			else
+				{
+				move_on=0;
+				alert_box("YOU MUST BE PAUSED TO CHECK CALLBACKS IN AUTO-DIAL MODE");
+				}
+			}
+		if (move_on == 1)
+			{
+			LastCallbackViewed=1;
+			showDiv('CallBacKsLisTBox');
+			var xmlhttp=false;
+			if (!xmlhttp && typeof XMLHttpRequest!='undefined')
+				{
+				xmlhttp = new XMLHttpRequest();
+				}
+			if (xmlhttp) 
+				{ 
+				var CBlist_query = "server_ip=" + server_ip + "&session_name=" + session_name + "&user=" + user + "&pass=" + pass + "&ACTION=CallLisNow&campaign=" + campaign + "&format=text";
+				xmlhttp.open('POST', 'vdc_db_query.php'); 
+				xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+				xmlhttp.send(CBlist_query); 
+				xmlhttp.onreadystatechange = function() 
+					{ 
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+						{
+					//	alert(xmlhttp.responseText);
+						var all_CBs = null;
+						all_CBs = xmlhttp.responseText;
+						var all_CBs_array=all_CBs.split("\n");
+						var CB_calls = all_CBs_array[0];
+						var loop_ct=0;
+						var conv_start=0;
+                        var CB_HTML = "<table width=\"100%\">
+                        <tr bgcolor=\"<?php echo $SCRIPT_COLOR ?>\">
+                        <td align=\"center\"><font class=\"log_title\">LEAD ID</font></td>
+                        <td align=\"center\"><font class=\"log_title\">VENDOR LEAD COD</font></td>
+                        <td align=\"center\"><font class=\"log_title\">PHONE CODE</font></td>
+                        <td align=\"center\"><font class=\"log_title\">PHONE NUMBER</font></td></tr>"
+						
+						while (loop_ct < CB_calls)
+							{
+							loop_ct++;
+							loop_s = loop_ct.toString();
+							if (loop_s.match(/1$|3$|5$|7$|9$/)) 
+								{var row_color = '#DDDDFF';}
+							else
+								{var row_color = '#CCCCFF';}
+							var conv_ct = (loop_ct + conv_start);
+							var call_array = all_CBs_array[conv_ct].split(" ~");
+
+							var lead_id = call_array[0] 
+							var vendor_lead_code = call_array[1];
+							var phone_code = call_array[2];
+							var phone_number = call_array[3];
+
+                            CB_HTML = CB_HTML + "<tr bgcolor=\"" + row_color + "\">
+                                                 <td><font class=\"log_text_sm\">" + loop_ct + "</font></td>
+                                                 <td align=\"right\"><font class=\"log_text_sm\">" + lead_id + "</td>
+                                                 <td align=\"right\"><font class=\"log_text_sm\">" + vendor_lead_code + "</td>
+                                                 <td align=\"right\"><font class=\"log_text_sm\">" + phone_code + "</font></td>
+                                                 <td align=\"right\"><font class=\"log_text_sm\">" + phone_number + "</font></td>
+                                                 <td align=\"right\"><font class=\"log_text_sm\">
+                                                 <a href=\"#\" onclick=\"NeWManuaLDiaLCalLSubmiT('NOW'," + lead_id + "','" + vendor_lead_code + "','" + phone_code + "','" + phone_number + "');return false;\">DIAL</a>&nbsp;</font>
+                                                 </td>
+                                                 </tr>";
+						CB_HTML = CB_HTML + "</table>";
+						document.getElementById("CallBacKsLisT").innerHTML = CB_HTML;
+						}
+					}
+				delete xmlhttp;
+				}
+			}
+		}
+
+
+
+
 
 
 // ################################################################################
