@@ -7108,25 +7108,18 @@ function  CallListPhone()
 							var phone_code = call_array[2];
 							var phone_number = call_array[3];
 
-                            CB_HTML = CB_HTML + "<tr bgcolor=\"" + row_color + "\">
-                                                 <td><font class=\"log_text_sm\">" + loop_ct + "</font></td>
-                                                 <td align=\"right\"><font class=\"log_text_sm\">" + lead_id + "</td>
-                                                 <td align=\"right\"><font class=\"log_text_sm\">" + vendor_lead_code + "</td>
-                                                 <td align=\"right\"><font class=\"log_text_sm\">" + phone_code + "</font></td>
-                                                 <td align=\"right\"><font class=\"log_text_sm\">" + phone_number + "</font></td>
-                                                 <td align=\"right\"><font class=\"log_text_sm\">
-                                                 <a href=\"#\" onclick=\"NeWManuaLDiaLCalLSubmiT('NOW'," + lead_id + "','" + vendor_lead_code + "','" + phone_code + "','" + phone_number + "');return false;\">DIAL</a>&nbsp;</font>
-                                                 </td>
-                                                 </tr>";
+                            CB_HTML = CB_HTML + "<tr bgcolor=\"" + row_color + "\"><td><font class=\"log_text_sm\">" + loop_ct + "</font></td><td align=\"right\"><font class=\"log_text_sm\">" + lead_id + "</td>
+                                                 <td align=\"right\"><font class=\"log_text_sm\">" + vendor_lead_code + "</td><td align=\"right\"><font class=\"log_text_sm\">" + phone_code + "</font></td>td>
+                                                 <td align=\"right\"><font class=\"log_text_sm\"><a href=\"#\" onclick=\"NeWManuaLDiaLCalLSubmiT('NOW'," + lead_id + "','" + vendor_lead_code + "','" + phone_code + "','" + phone_number + "');return false;\">DIAL</a>&nbsp;</font></td></tr>";
+						}
 						CB_HTML = CB_HTML + "</table>";
 						document.getElementById("CallBacKsLisT").innerHTML = CB_HTML;
-						}
 					}
 				delete xmlhttp;
 				}
 			}
 		}
-
+}
 
 
 
