@@ -7104,7 +7104,7 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 							var phone_code = call_array[2];
 							var phone_number = call_array[3];
 
-                            CB_HTML = CB_HTML + "<tr bgcolor=\"" + row_color + "\"> <td><font class=\"log_text_sm\">" + loop_ct + "</font></td><td align=\"right\"><font class=\"log_text_sm\">" + lead_id + "</td><td align=\"right\"><font class=\"log_text_sm\">" + vendor_lead_code + "</td><td align=\"right\"><font class=\"log_text_sm\">" + phone_code + "</font></td> <td align=\"right\"><font class=\"log_text_sm\">" + phone_number + "</font></td><td align=\"right\"><font class=\"log_text_sm\"><a href=\"#\" onclick=\"NeWManuaLDiaLCalLSubmiTPhone('NOW','YES'," + lead_id + "','" + vendor_lead_code + "','" + phone_code + "','" + phone_number + "');return false;\">DIAL</a>&nbsp;</font></td></tr>";
+                            CB_HTML = CB_HTML + "<tr bgcolor=\"" + row_color + "\"> <td><font class=\"log_text_sm\">" + loop_ct + "</font></td><td align=\"right\"><font class=\"log_text_sm\">" + lead_id + "</td><td align=\"right\"><font class=\"log_text_sm\">" + vendor_lead_code + "</td><td align=\"right\"><font class=\"log_text_sm\">" + phone_code + "</font></td> <td align=\"right\"><font class=\"log_text_sm\">" + phone_number + "</font></td><td align=\"right\"><font class=\"log_text_sm\"><a href=\"#\" onclick=\"NeWManuaLDiaLCalLSubmiTPhone('NOW','YES','" + lead_id + "','" + vendor_lead_code + "','" + phone_code + "','" + phone_number + "','0','YES');return false;\">DIAL</a>&nbsp;</font></td></tr>";
 							}
 						CB_HTML = CB_HTML + "</table>";
 						document.getElementById("CallBacKsLisT").innerHTML = CB_HTML;
@@ -8032,9 +8032,12 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 
 	function NeWManuaLDiaLCalLSubmiTPhone(tempDiaLnow,NMDclick,MDLeadIDform,MDVendorLeadCode,MDDiaLCodEform,MDPhonENumbeRform,MDTypeform,MDDiaLOverridEform)
 		{
+
 		if (NMDclick=='YES')
 			{button_click_log = button_click_log + "" + SQLdate + "-----NeWManuaLDiaLCalLSubmiT---" + tempDiaLnow + "|";}
-		if (waiting_on_dispo > 0)
+		// if (waiting_on_dispo > 0)
+
+		if (false)
 			{
 			alert_box("<?php echo _QXZ("System Delay, Please try again"); ?><BR><font size=1><?php echo _QXZ("code:"); ?>" + agent_log_id + " - " + waiting_on_dispo + "</font>");
 			}
@@ -8048,7 +8051,7 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 			var MDPhonENumbeRform = MDPhonENumbeRform;
 			var MDLeadIDform = MDLeadIDform;
 			var MDLeadIDEntryform = document.vicidial_form.MDLeadIDEntry.value;
-			var MDTypeform = document.vicidial_form.MDType.value;
+			var MDTypeform = MDTypeform;
 			var MDDiaLOverridEform = MDDiaLOverridEform;
 			var MDVendorLeadCode = MDVendorLeadCode;
 
@@ -8107,7 +8110,9 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 				if (active_group_alias.length > 1)
 					{var sending_group_alias = 1;}
 
-				ManualDialNext("",MDLeadIDform,MDDiaLCodEform,MDPhonENumbeRform,MDLookuPLeaD,MDVendorLeadCode,sending_group_alias,MDTypeform);
+				// ManualDialNext('',,MDDiaLCodEform,,,,MDTypeform);
+				ManualDialNext('','',MDLeadIDform,MDDiaLCodEform,MDPhonENumbeRform,MDLookuPLeaD,MDVendorLeadCode,'','0');
+				// ManualDialNext('','',MDDiaLCodEform,MDPhonENumbeRform,MDLookuPLeaD,MDVendorLeadCode,'0');
 				}
 
 			document.vicidial_form.MDPhonENumbeR.value = '';
