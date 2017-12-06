@@ -7043,7 +7043,7 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 
 
 //################################################################################3
-//nueva funcion modificada
+//nueva funcion modificada KEISI
 
 	function CallListPhone()
 		{
@@ -7086,27 +7086,25 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 						var CB_calls = all_CBs_array[0];
 						var loop_ct=0;
 						var conv_start=0;
-                        var CB_HTML = "<table width=\"100%\"><tr bgcolor=\"<?php echo $SCRIPT_COLOR ?>\"> <td align=\"center\"><font class=\"log_title\">LEAD ID</font></td><td align=\"center\"><font class=\"log_title\">VENDOR LEAD COD</font></td><td align=\"center\"><font class=\"log_title\">PHONE CODE</font></td><td align=\"center\"><font class=\"log_title\">PHONE NUMBER</font></td></tr>";
+                        var CB_HTML = "<table width=\"100%\"><tr bgcolor=\"<?php echo $SCRIPT_COLOR ?>\"><td><font class=\"log_title\">#</font></td><td align=\"center\"><font class=\"log_title\">LEAD ID</font></td><td align=\"center\"><font class=\"log_title\">VENDOR LEAD COD</font></td><td align=\"center\"><font class=\"log_title\">PHONE CODE</font></td><td align=\"center\"><font class=\"log_title\">PHONE NUMBER</font></td><td align=\"center\"><font class=\"log_title\">CALL</font></td></tr>";
 						
 						while (loop_ct < CB_calls)
 							{
 							loop_ct++;
 							loop_s = loop_ct.toString();
+							
 							if (loop_s.match(/1$|3$|5$|7$|9$/)) 
 								{var row_color = '#DDDDFF';}
 							else
 								{var row_color = '#CCCCFF';}
 							var conv_ct = (loop_ct + conv_start);
-							var call_array = all_CBs_array[conv_ct].split(" ~");
-
-							var lead_id = call_array[0] 
+							var call_array = all_CBs_array[conv_ct].split("-!T-");
+							var lead_id = call_array[0];
 							var vendor_lead_code = call_array[1];
 							var phone_code = call_array[2];
 							var phone_number = call_array[3];
 
-                            CB_HTML = CB_HTML + "<tr bgcolor=\"" + row_color + "\"> <td><font class=\"log_text_sm\">" + loop_ct + "</font></td><td align=\"right\"><font class=\"log_text_sm\">" + lead_id + "</td><td align=\"right\"><font class=\"log_text_sm\">" + vendor_lead_code + "</td><td align=\"right\"><font class=\"log_text_sm\">" + phone_code + "</font></td> <td align=\"right\"><font class=\"log_text_sm\">" + phone_number + "</font></td><td align=\"right\"><font class=\"log_text_sm\"><a href=\"#\" onclick=\"NeWManuaLDiaLCalLSubmiT('NOW'," + lead_id + "','" + vendor_lead_code + "','" + phone_code + "','" + phone_number + "');return false;\">DIAL</a>&nbsp;</font></td></tr>";
-                            
-						
+                            CB_HTML = CB_HTML + "<tr bgcolor=\"" + row_color + "\"> <td><font class=\"log_text_sm\">" + loop_ct + "</font></td><td align=\"right\"><font class=\"log_text_sm\">" + lead_id + "</td><td align=\"right\"><font class=\"log_text_sm\">" + vendor_lead_code + "</td><td align=\"right\"><font class=\"log_text_sm\">" + phone_code + "</font></td> <td align=\"right\"><font class=\"log_text_sm\">" + phone_number + "</font></td><td align=\"right\"><font class=\"log_text_sm\"><a href=\"#\" onclick=\"NeWManuaLDiaLCalLSubmiTPhone('NOW','YES'," + lead_id + "','" + vendor_lead_code + "','" + phone_code + "','" + phone_number + "');return false;\">DIAL</a>&nbsp;</font></td></tr>";
 							}
 						CB_HTML = CB_HTML + "</table>";
 						document.getElementById("CallBacKsLisT").innerHTML = CB_HTML;
@@ -8028,6 +8026,100 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 			document.vicidial_form.MDPhonENumbeRHiddeN.value = '';
 			}
 		}
+
+
+/*KEISI*/
+
+	function NeWManuaLDiaLCalLSubmiTPhone(tempDiaLnow,NMDclick,MDLeadIDform,MDVendorLeadCode,MDDiaLCodEform,MDPhonENumbeRform,MDTypeform,MDDiaLOverridEform)
+		{
+		if (NMDclick=='YES')
+			{button_click_log = button_click_log + "" + SQLdate + "-----NeWManuaLDiaLCalLSubmiT---" + tempDiaLnow + "|";}
+		if (waiting_on_dispo > 0)
+			{
+			alert_box("<?php echo _QXZ("System Delay, Please try again"); ?><BR><font size=1><?php echo _QXZ("code:"); ?>" + agent_log_id + " - " + waiting_on_dispo + "</font>");
+			}
+		else
+			{
+			hideDiv('NeWManuaLDiaLBox');
+		//	document.getElementById("debugbottomspan").innerHTML = "DEBUG OUTPUT" + document.vicidial_form.MDPhonENumbeR.value + "|" + active_group_alias;
+
+			var sending_group_alias = 0;
+			var MDDiaLCodEform = MDDiaLCodEform;
+			var MDPhonENumbeRform = MDPhonENumbeRform;
+			var MDLeadIDform = MDLeadIDform;
+			var MDLeadIDEntryform = document.vicidial_form.MDLeadIDEntry.value;
+			var MDTypeform = document.vicidial_form.MDType.value;
+			var MDDiaLOverridEform = MDDiaLOverridEform;
+			var MDVendorLeadCode = MDVendorLeadCode;
+
+			var MDLookuPLeaD = 'new';
+			if ( (document.vicidial_form.LeadLookuP.checked==true) || (manual_dial_search_checkbox == 'SELECTED_LOCK') )
+				{MDLookuPLeaD = 'lookup';}
+
+			if (MDPhonENumbeRform == 'XXXXXXXXXX')
+				{MDPhonENumbeRform = document.vicidial_form.MDPhonENumbeRHiddeN.value;}
+
+			if (MDDiaLCodEform.length < 1)
+				{MDDiaLCodEform = document.vicidial_form.phone_code.value;}
+
+			if (MDLeadIDEntryform.length > 0)
+				{MDLeadIDform = document.vicidial_form.MDLeadIDEntry.value;}
+
+			if ( (MDDiaLOverridEform.length > 0) && (active_ingroup_dial.length < 1) && (manual_dial_override_field == 'ENABLED') )
+				{
+				agent_dialed_number=1;
+				agent_dialed_type='MANUAL_OVERRIDE';
+				basic_originate_call(session_id,'NO','YES',MDDiaLOverridEform,'YES','','1','0');
+				}
+			else
+				{
+				if (active_ingroup_dial.length < 1)
+					{
+					auto_dial_level=0;
+					manual_dial_in_progress=1;
+					agent_dialed_number=1;
+					}
+				MainPanelToFront();
+
+				if ( (tempDiaLnow == 'PREVIEW') && (active_ingroup_dial.length < 1) )
+					{
+				//	alt_phone_dialing=1;
+					agent_dialed_type='MANUAL_PREVIEW';
+					buildDiv('DiaLLeaDPrevieW');
+					if (alt_phone_dialing == 1)
+						{buildDiv('DiaLDiaLAltPhonE');}
+					document.vicidial_form.LeadPreview.checked=true;
+				//	document.vicidial_form.DiaLAltPhonE.checked=true;
+					}
+				else
+					{
+					agent_dialed_type='MANUAL_DIALNOW';
+					if ( (alt_number_dialing == 'SELECTED') || (alt_number_dialing == 'SELECTED_TIMER_ALT') || (alt_number_dialing == 'SELECTED_TIMER_ADDR3') )
+						{
+						document.vicidial_form.DiaLAltPhonE.checked=true;
+						}
+					else
+						{
+						document.vicidial_form.LeadPreview.checked=false;
+						document.vicidial_form.DiaLAltPhonE.checked=false;
+						}
+					}
+				if (active_group_alias.length > 1)
+					{var sending_group_alias = 1;}
+
+				ManualDialNext("",MDLeadIDform,MDDiaLCodEform,MDPhonENumbeRform,MDLookuPLeaD,MDVendorLeadCode,sending_group_alias,MDTypeform);
+				}
+
+			document.vicidial_form.MDPhonENumbeR.value = '';
+			document.vicidial_form.MDDiaLOverridE.value = '';
+			document.vicidial_form.MDLeadID.value = '';
+			document.vicidial_form.MDLeadIDEntry.value='';
+			document.vicidial_form.MDType.value = '';
+			document.vicidial_form.MDPhonENumbeRHiddeN.value = '';
+			}
+		}
+
+
 
 // ################################################################################
 // Fast version of manual dial

@@ -14770,8 +14770,10 @@ if ($ACTION == 'CalLBacKLisT')
 
 
 
+
+
 /*Mestra los datos en el navegador*/
-if ($ACTION == 'CallLisNow')
+/*if ($ACTION == 'CallLisNow')
 {
    
    	$stmt = "SELECT lead_id,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` limit 10";
@@ -14786,7 +14788,38 @@ if ($ACTION == 'CallLisNow')
           // echo "$resultado[0] ~$resultado[1] ~$resultado[2] ~$resultado[3]\n";
 	  
 	 	}
-}
+}*/
+
+
+//KEISI
+if ($ACTION == 'CallLisNow')
+	{
+	$stmt = "SELECT lead_id,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` limit 10;";
+	
+	if ($DB) {
+		echo "$stmt\n";
+	}
+	    $rslt=mysql_to_mysqli($stmt, $link);
+
+		if ($mel > 0) {
+			mysql_error_logging($NOW_TIME,$link,$mel,$stmt,'00178',$user,$server_ip,$session_name,$one_mysql_log);
+		}
+		if ($rslt) {
+		$callbacks_count = mysqli_num_rows($rslt);
+        }
+
+	echo "$callbacks_count\n";
+
+	$loop_count=0;
+	while ($callbacks_count>$loop_count)
+		{
+		$row=mysqli_fetch_row($rslt);
+		$CBoutput = "$row[0]-!T-$row[1]-!T-$row[2]-!T-$row[3]";
+		echo "$CBoutput\n";
+		$loop_count++;
+		}
+
+	}
 
 
 ################################################################################
