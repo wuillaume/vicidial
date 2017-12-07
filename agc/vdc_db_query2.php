@@ -431,7 +431,7 @@ $VD_login=0;
 $SSagent_debug_logging=0;
 $startMS = microtime();
 //keisi
-$leadId ;
+$lead;
 //keisi//
 
 require_once("dbconnect_mysqli.php");
@@ -442,8 +442,8 @@ if (isset($_GET["user"]))						{$user=$_GET["user"];}
 	elseif (isset($_POST["user"]))				{$user=$_POST["user"];}
 
 //keisi
-if (isset($_GET["leadId"]))						{$leadId=$_GET["leadId"];}
-	elseif (isset($_POST["leadId"]))				{$leadId=$_POST["leadId"];}
+if (isset($_GET["lead"]))						{$lead=$_GET["lead"];}
+	elseif (isset($_POST["lead"]))				{$lead=$_POST["lead"];}
 //keisi
 
 
@@ -14804,7 +14804,7 @@ if ($ACTION == 'CalLBacKLisT')
 //KEISI
 if ($ACTION == 'CallLisNow')
 	{
-	$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where lead_id = $leadId  ;";
+	$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where lead_id = $lead;";
 	
 	if ($DB) {
 		echo "$stmt\n";

@@ -7118,9 +7118,19 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 	}
 
 
-function CallListPhoneSearch()
+function CallListPhoneSearch(type)
 		{
+        var lead ;
+
+        if (type =="Id"){
+			lead = document.getElementById('txtlead').value;
+        }else if (type =="Name") {
+			lead = document.getElementById('txtleadName').value;
+
+        }
+
 		var move_on=1;
+
 		if ( (AutoDialWaiting == 1) || (VD_live_customer_call==1) || (alt_dial_active==1) || (MD_channel_look==1) || (in_lead_preview_state==1) )
 			{
 			if ( (auto_pause_precall == 'Y') && ( (agent_pause_codes_active=='Y') || (agent_pause_codes_active=='FORCE') ) && (AutoDialWaiting == 1) && (VD_live_customer_call!=1) && (alt_dial_active!=1) && (MD_channel_look!=1) && (in_lead_preview_state!=1) )
@@ -7145,8 +7155,8 @@ function CallListPhoneSearch()
 			if (xmlhttp) 
 				{ 
 
-				var leadId = document.getElementById('txtlead').value;
-				var CBlist_query = "server_ip=" + server_ip + "&session_name=" + session_name + "&user=" + user + "&pass=" + pass + "&ACTION=CallLisNow&campaign=" + campaign + "&leadId=" + leadId +   "&format=text";
+				
+				var CBlist_query = "server_ip=" + server_ip + "&session_name=" + session_name + "&user=" + user + "&pass=" + pass + "&ACTION=CallLisNow&campaign=" + campaign + "&lead=" + lead +   "&format=text";
 				xmlhttp.open('POST', 'vdc_db_query2.php'); 
 				xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
 				xmlhttp.send(CBlist_query); 
@@ -19006,11 +19016,17 @@ if ($agent_display_dialable_leads > 0)
 	?>
 
     <input type="text" placeholder="write the led code" id ="txtlead">
-    <input type="button" value="SEARCH" onclick="CallListPhoneSearch();return false;"> 
+    <input type="button" value="SEARCH" onclick="CallListPhoneSearch('Id');return false;"> 
+
+    
+
+    <input type="text" placeholder="write the led code" id ="txtleadName">
+    <input type="button" value="SEARCH" onclick="CallListPhoneSearch('Name');return false;"> 
+
 	<div class="scroll_callback_auto" id="CallLisT"></div>
 	
     <br /><font class="sh_text"> &nbsp;
-	<a href="#" onclick="CallListPhone();return false;"><?php echo _QXZ("Refresh"); ?></a>
+	<a href="#" onclick="CallListPhoneSearch();return false;"><?php echo _QXZ("Refresh"); ?></a>
 	 &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; 
 	<a href="#" onclick="CalLPhoneLisTClose();return false;"><?php echo _QXZ("Go Back"); ?></a>
 	</font>
