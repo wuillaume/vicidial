@@ -7120,13 +7120,12 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 
 function CallListPhoneSearch(type)
 		{
-        var lead ;
+        var lead ="" ;
 
         if (type =="Id"){
 			lead = document.getElementById('txtlead').value;
-        }else if (type =="Name") {
+        }else {
 			lead = document.getElementById('txtleadName').value;
-
         }
 
 		var move_on=1;
@@ -7156,7 +7155,7 @@ function CallListPhoneSearch(type)
 				{ 
 
 				
-				var CBlist_query = "server_ip=" + server_ip + "&session_name=" + session_name + "&user=" + user + "&pass=" + pass + "&ACTION=CallLisNow&campaign=" + campaign + "&lead=" + lead +   "&format=text";
+				var CBlist_query = "server_ip=" + server_ip + "&session_name=" + session_name + "&user=" + user + "&pass=" + pass + "&ACTION=CallLisNow&campaign=" + campaign + "&lead=" + lead + "&typeLead=" + type +   "&format=text";
 				xmlhttp.open('POST', 'vdc_db_query2.php'); 
 				xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
 				xmlhttp.send(CBlist_query); 
@@ -19020,7 +19019,7 @@ if ($agent_display_dialable_leads > 0)
 
     
 
-    <input type="text" placeholder="write the led code" id ="txtleadName">
+    <input type="text" placeholder="write the led Last Name" id ="txtleadName">
     <input type="button" value="SEARCH" onclick="CallListPhoneSearch('Name');return false;"> 
 
 	<div class="scroll_callback_auto" id="CallLisT"></div>
