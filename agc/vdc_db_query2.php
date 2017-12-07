@@ -433,6 +433,8 @@ $startMS = microtime();
 //keisi
 $lead;
 $typeLead;
+$leadFirstName;
+$leadLastName;
 //keisi//
 
 
@@ -449,6 +451,12 @@ if (isset($_GET["lead"]))						{$lead=$_GET["lead"];}
 
 if (isset($_GET["typeLead"]))						{$typeLead=$_GET["typeLead"];}
 	elseif (isset($_POST["typeLead"]))				{$typeLead=$_POST["typeLead"];}	
+
+if (isset($_GET["leadFirstName"]))						{$leadFirstName=$_GET["leadFirstName"];}
+	elseif (isset($_POST["leadFirstName"]))				{$leadFirstName=$_POST["leadFirstName"];}	
+
+if (isset($_GET["leadLastName"]))						{$leadLastName=$_GET["leadLastName"];}
+	elseif (isset($_POST["leadLastName"]))				{$leadLastName=$_POST["leadLastName"];}	
 //keisi
 
 
@@ -14811,10 +14819,17 @@ if ($ACTION == 'CallLisNow')
 	{
     $stmt;
 	if ($typeLead=="Id"){
-
-			$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where lead_id = $lead;";
+		$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where lead_id = $lead;";
 	}else {
-			$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where concat_ws(' ',first_name,last_name ) like '"$lead"';";
+     if ($leadFirstName==""){
+     	$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where first_name = '$leadLastName' ;";
+     }else if ($leadLastName==""){
+        $stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where last_name  = '$leadFirstName' ;"; 
+     }else if ($leadFirstName=="" && $leadLastName==""){
+        echo"<script>alert('Writer First Name of Last Name')</script>"
+     }
+     $fullname = $leadFirstName.' '.$leadLastName;
+     $stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where  concat_ws(' ',first_name,last_name) = '$fullname' ;"; 
 	}
 
 	if ($DB) {

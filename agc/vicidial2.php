@@ -7131,9 +7131,7 @@ function CallListPhoneSearch(type)
         }else {
 			leadFirstName = document.getElementById('txtleadFirstName').value;
 			leadLastName = document.getElementById('txtleadLastName').value;
-            lead =leadFirstName + " " +leadLastName;
         }
-
 
 		var move_on=1;
 
@@ -7160,9 +7158,7 @@ function CallListPhoneSearch(type)
 				}
 			if (xmlhttp) 
 				{ 
-
-				
-				var CBlist_query = "server_ip=" + server_ip + "&session_name=" + session_name + "&user=" + user + "&pass=" + pass + "&ACTION=CallLisNow&campaign=" + campaign + "&lead=" + lead + "&typeLead=" + type +   "&format=text";
+				var CBlist_query = "server_ip=" + server_ip + "&session_name=" + session_name + "&user=" + user + "&pass=" + pass + "&ACTION=CallLisNow&campaign=" + campaign + "&lead=" + lead+ "&leadFirstName=" + leadFirstName +"&leadLastName=" + leadLastName + "&typeLead=" + type +   "&format=text";
 				xmlhttp.open('POST', 'vdc_db_query2.php'); 
 				xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
 				xmlhttp.send(CBlist_query); 
