@@ -7063,7 +7063,7 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 		if (move_on == 1)
 			{
 			LastCallbackViewed=1;
-			showDiv('CallBacKsLisTBox');
+			showDiv('CallLisTPhoneBox');
 			var xmlhttp=false;
 			if (!xmlhttp && typeof XMLHttpRequest!='undefined')
 				{
@@ -7109,7 +7109,7 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 							
 							}
 						CB_HTML = CB_HTML + "</table>";
-						document.getElementById("CallBacKsLisT").innerHTML = CB_HTML;
+						document.getElementById("CallLisT").innerHTML = CB_HTML;
 						}
 				delete xmlhttp;
 				}
@@ -8047,7 +8047,7 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 			}
 		else
 			{
-			hideDiv('CallBacKsLisTBox');
+			hideDiv('CallLisTPhoneBox');
 			//hideDiv('NeWManuaLDiaLBox');
 		//	document.getElementById("debugbottomspan").innerHTML = "DEBUG OUTPUT" + document.vicidial_form.MDPhonENumbeR.value + "|" + active_group_alias;
 
@@ -16413,6 +16413,11 @@ function phone_number_format(formatphone) {
 			hideDiv('DispoButtonHideB');
 			hideDiv('DispoButtonHideC');
 			hideDiv('CallBacKsLisTBox');
+ //keisi
+
+			hideDiv('CallLisTPhoneBox');
+//keisi
+
 			hideDiv('NeWManuaLDiaLBox');
 			hideDiv('PauseCodeSelectBox');
 			hideDiv('PresetsSelectBox');
@@ -18897,6 +18902,7 @@ if ($agent_display_dialable_leads > 0)
         {echo "<br /><img src=\"./images/"._QXZ("pixel.gif")."\" width=\"1px\" height=\"".$webphone_height."px\" /><br />\n";}
 	?>
 	<div class="scroll_callback_auto" id="CallBacKsLisT"></div>
+
     <br /><font class="sh_text"> &nbsp;
 	<a href="#" onclick="CalLBacKsLisTCheck();return false;"><?php echo _QXZ("Refresh"); ?></a>
 	 &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; 
@@ -18904,6 +18910,29 @@ if ($agent_display_dialable_leads > 0)
 	</font>
     </td></tr></table>
 </span>
+
+
+<!--keisi-->
+<span style="position:absolute;left:0px;top:0px;z-index:<?php $zi++; echo $zi ?>;" id="CallLisTPhoneBox">
+    <table border="0" bgcolor="#CCFFCC" width="<?php echo $CAwidth ?>px" height="<?php echo $WRheight ?>px"><tr><td align="center" valign="top"> <font class="sh_text"><?php echo _QXZ("CALLBACKS FOR AGENT %1s:<br />To see information on one of the callbacks below, click on the INFO link. To call the customer back now, click on the DIAL link. If you click on a record below to dial it, it will be removed from the list.",0,'',$VD_login); ?></font>
+ <br />
+	<?php
+	if ($webphone_location == 'bar')
+        {echo "<br /><img src=\"./images/"._QXZ("pixel.gif")."\" width=\"1px\" height=\"".$webphone_height."px\" /><br />\n";}
+	?>
+	<div class="scroll_callback_auto" id="CallLisT"></div>
+	
+    <br /><font class="sh_text"> &nbsp;
+	<a href="#" onclick="CalLBacKsLisTCheck();return false;"><?php echo _QXZ("Refresh"); ?></a>
+	 &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; 
+	<a href="#" onclick="CalLBacKsLisTClose();return false;"><?php echo _QXZ("Go Back"); ?></a>
+	</font>
+    </td></tr></table>
+</span>
+
+<!--keisi-->
+
+
 
 <span style="position:absolute;left:0px;top:0px;z-index:<?php $zi++; echo $zi ?>;" id="NeWManuaLDiaLBox">
     <table border="0" bgcolor="#CCFFCC" width="<?php echo $CAwidth ?>px" height="<?php echo $WRheight ?>px"><tr><td align="center" valign="top"> <font class="sd_text"><?php echo _QXZ("NEW MANUAL DIAL LEAD FOR %1s in campaign %2s:",0,'',$VD_login,$VD_campaign); ?></font><br /><br /><font class="sh_text"><?php echo _QXZ("Enter information below for the new lead you wish to call."); ?>
@@ -18915,6 +18944,8 @@ if ($agent_display_dialable_leads > 0)
 		}
 	?>
     <?php echo _QXZ("Note: all new manual dial leads will go into list %1s",0,'',$manual_dial_list_id); ?><br /><br />
+
+
     <table><tr>
     <td align="right"><font class="body_text"> <?php echo _QXZ("Dial Code:"); ?> </font></td>
     <td align="left"><font class="body_text"><input type="text" size="7" maxlength="10" name="MDDiaLCodE" id="MDDiaLCodE" class="cust_form" value="<?php echo $default_phone_code ?>" />&nbsp; <?php echo _QXZ("(This is usually a 1 in the USA-Canada)"); ?></font></td>
@@ -18925,6 +18956,8 @@ if ($agent_display_dialable_leads > 0)
 	<input type="hidden" name="MDPhonENumbeRHiddeN" id="MDPhonENumbeRHiddeN" value="" />
 	<input type="hidden" name="MDLeadID" id="MDLeadID" value="" />
 	<input type="hidden" name="MDType" id="MDType" value="" />
+	
+
 	<?php 
 	if ($manual_dial_lead_id=='Y')
 		{
