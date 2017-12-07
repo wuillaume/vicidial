@@ -430,6 +430,9 @@ $DB=0;
 $VD_login=0;
 $SSagent_debug_logging=0;
 $startMS = microtime();
+//keisi
+$leadId ;
+//keisi//
 
 require_once("dbconnect_mysqli.php");
 require_once("functions.php");
@@ -437,6 +440,13 @@ require_once("functions.php");
 ### If you have globals turned off uncomment these lines
 if (isset($_GET["user"]))						{$user=$_GET["user"];}
 	elseif (isset($_POST["user"]))				{$user=$_POST["user"];}
+
+//keisi
+if (isset($_GET["leadId"]))						{$leadId=$_GET["leadId"];}
+	elseif (isset($_POST["leadId"]))				{$leadId=$_POST["leadId"];}
+//keisi
+
+
 if (isset($_GET["pass"]))						{$pass=$_GET["pass"];}
 	elseif (isset($_POST["pass"]))				{$pass=$_POST["pass"];}
 if (isset($_GET["server_ip"]))					{$server_ip=$_GET["server_ip"];}
@@ -14794,7 +14804,7 @@ if ($ACTION == 'CalLBacKLisT')
 //KEISI
 if ($ACTION == 'CallLisNow')
 	{
-	$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` limit 10;";
+	$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where lead_id = $leadId  ;";
 	
 	if ($DB) {
 		echo "$stmt\n";
@@ -14818,7 +14828,6 @@ if ($ACTION == 'CallLisNow')
 		echo "$CBoutput\n";
 		$loop_count++;
 		}
-
 	}
 
 

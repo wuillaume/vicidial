@@ -7118,8 +7118,79 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 	}
 
 
+function CallListPhoneSearch()
+		{
+		var move_on=1;
+		if ( (AutoDialWaiting == 1) || (VD_live_customer_call==1) || (alt_dial_active==1) || (MD_channel_look==1) || (in_lead_preview_state==1) )
+			{
+			if ( (auto_pause_precall == 'Y') && ( (agent_pause_codes_active=='Y') || (agent_pause_codes_active=='FORCE') ) && (AutoDialWaiting == 1) && (VD_live_customer_call!=1) && (alt_dial_active!=1) && (MD_channel_look!=1) && (in_lead_preview_state!=1) )
+				{
+				agent_log_id = AutoDial_ReSume_PauSe("VDADpause",'','','','','1',auto_pause_precall_code);
+				}
+			else
+				{
+				move_on=0;
+				alert_box("YOU MUST BE PAUSED TO CHECK CALLBACKS IN AUTO-DIAL MODE");
+				}
+			}
+		if (move_on == 1)
+			{
+			LastCallbackViewed=1;
+			showDiv('CallLisTPhoneBox');
+			var xmlhttp=false;
+			if (!xmlhttp && typeof XMLHttpRequest!='undefined')
+				{
+				xmlhttp = new XMLHttpRequest();
+				}
+			if (xmlhttp) 
+				{ 
 
+				var leadId = document.getElementById('txtlead').value;
+				var CBlist_query = "server_ip=" + server_ip + "&session_name=" + session_name + "&user=" + user + "&pass=" + pass + "&ACTION=CallLisNow&campaign=" + campaign + "&leadId=" + leadId +   "&format=text";
+				xmlhttp.open('POST', 'vdc_db_query2.php'); 
+				xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+				xmlhttp.send(CBlist_query); 
+				xmlhttp.onreadystatechange = function() 
+					{ 
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+						{
+					//	alert(xmlhttp.responseText);
+						var all_CBs = null;
+						all_CBs = xmlhttp.responseText;
+						var all_CBs_array=all_CBs.split("\n");
+						var CB_calls = all_CBs_array[0];
+						var loop_ct=0;
+						var conv_start=0;
+                        var CB_HTML = "<table width=\"100%\"><tr bgcolor=\"<?php echo $SCRIPT_COLOR ?>\"><td><font class=\"log_title\">#</font></td><td align=\"center\"><font class=\"log_title\">LEAD ID</font></td><td align=\"center\"><font class=\"log_title\">LEAD NAME</font></td><td align=\"center\"><font class=\"log_title\">CALL</font></td></tr>";
+						
+						while (loop_ct < CB_calls)
+							{
+							loop_ct++;
+							loop_s = loop_ct.toString();
+							
+							if (loop_s.match(/1$|3$|5$|7$|9$/)) 
+								{var row_color = '#DDDDFF';}
+							else
+								{var row_color = '#CCCCFF';}
+							var conv_ct = (loop_ct + conv_start);
+							var call_array = all_CBs_array[conv_ct].split("-!T-");
+							var lead_id = call_array[0];
+							var lead_name = call_array[1] +" " +call_array[2];
+							var vendor_lead_code = call_array[3];
+							var phone_code = call_array[4];
+							var phone_number = call_array[5];
 
+                            CB_HTML = CB_HTML + "<tr bgcolor=\"" + row_color + "\"> <td><font class=\"log_text_sm\">" + loop_ct + "</font></td><td align=\"right\"><font class=\"log_text_sm\">" + lead_id + "</td><td align=\"right\"><font class=\"log_text_sm\">" + lead_name + "</td><td align=\"right\"><font class=\"log_text_sm\"><a href=\"#\" onclick=\"NeWManuaLDiaLCalLSubmiTPhone('NOW','YES','" + lead_id + "','" + vendor_lead_code + "','" + phone_code + "','" + phone_number + "');return false;\">DIAL</a>&nbsp;</font></td></tr>";
+							
+							}
+						CB_HTML = CB_HTML + "</table>";
+						document.getElementById("CallLisT").innerHTML = CB_HTML;
+						}
+				delete xmlhttp;
+				}
+			}
+		}
+	}
 
 
 // ################################################################################
@@ -7233,7 +7304,7 @@ function CalLPhoneLisTClose()
 			{
 			AutoDial_ReSume_PauSe("VDADready");
 			}
-		hideDiv('CalLPhoneLisTClose');
+		hideDiv('CallLisTPhoneBox');
 		}
 //keisi
 
@@ -18934,8 +19005,8 @@ if ($agent_display_dialable_leads > 0)
         {echo "<br /><img src=\"./images/"._QXZ("pixel.gif")."\" width=\"1px\" height=\"".$webphone_height."px\" /><br />\n";}
 	?>
 
-    <input type="text">
-    <input type="button">
+    <input type="text" placeholder="write the led code" id ="txtlead">
+    <input type="button" value="SEARCH" onclick="CallListPhoneSearch();return false;"> 
 	<div class="scroll_callback_auto" id="CallLisT"></div>
 	
     <br /><font class="sh_text"> &nbsp;
@@ -18945,7 +19016,6 @@ if ($agent_display_dialable_leads > 0)
 	</font>
     </td></tr></table>
 </span>
-
 <!--keisi-->
 
 
