@@ -14828,8 +14828,7 @@ if ($ACTION == 'CallLisNow')
      }else if ($leadFirstName=="" && $leadLastName==""){
         echo"<script>alert('Writer First Name of Last Name')</script>"
      }
-     $fullname = $leadFirstName.' '.$leadLastName;
-     $stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where  concat_ws(' ',first_name,last_name) = '$fullname' ;"; 
+     $stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where  first_name='$leadFirstName'  and  last_name ='$leadLastName';"; 
 	}
 
 	if ($DB) {
