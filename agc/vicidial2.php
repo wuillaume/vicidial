@@ -7225,6 +7225,22 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 		}
 
 
+//keisi
+
+		function CalLBacKsLisTClose()
+		{
+		button_click_log = button_click_log + "" + SQLdate + "-----CalLBacKsLisTClose---|";
+		if (auto_resume_precall == 'Y')
+			{
+			AutoDial_ReSume_PauSe("VDADready");
+			}
+		hideDiv('CalLPhoneLisTClose');
+		CalLBacKsCounTCheck();
+		}
+
+//keisi
+
+
 // ################################################################################
 // closes call log display screen
 	function CalLLoGVieWClose()
@@ -18923,9 +18939,9 @@ if ($agent_display_dialable_leads > 0)
 	<div class="scroll_callback_auto" id="CallLisT"></div>
 	
     <br /><font class="sh_text"> &nbsp;
-	<a href="#" onclick="CalLBacKsLisTCheck();return false;"><?php echo _QXZ("Refresh"); ?></a>
+	<a href="#" onclick="CallListPhone();return false;"><?php echo _QXZ("Refresh"); ?></a>
 	 &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; 
-	<a href="#" onclick="CalLBacKsLisTClose();return false;"><?php echo _QXZ("Go Back"); ?></a>
+	<a href="#" onclick="CalLPhoneLisTClose();return false;"><?php echo _QXZ("Go Back"); ?></a>
 	</font>
     </td></tr></table>
 </span>
