@@ -7226,18 +7226,15 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 
 
 //keisi
-
-		function CalLBacKsLisTClose()
+function CalLPhoneLisTClose()
 		{
-		button_click_log = button_click_log + "" + SQLdate + "-----CalLBacKsLisTClose---|";
+		button_click_log = button_click_log + "" + SQLdate + "-----ManualDialHide---|";
 		if (auto_resume_precall == 'Y')
 			{
 			AutoDial_ReSume_PauSe("VDADready");
 			}
 		hideDiv('CalLPhoneLisTClose');
-		CalLBacKsCounTCheck();
 		}
-
 //keisi
 
 
@@ -18931,11 +18928,14 @@ if ($agent_display_dialable_leads > 0)
 <!--keisi-->
 <span style="position:absolute;left:0px;top:0px;z-index:<?php $zi++; echo $zi ?>;" id="CallLisTPhoneBox">
     <table border="0" bgcolor="#CCFFCC" width="<?php echo $CAwidth ?>px" height="<?php echo $WRheight ?>px"><tr><td align="center" valign="top"> <font class="sh_text"><?php echo _QXZ("CALLBACKS FOR AGENT %1s:<br />To see information on one of the callbacks below, click on the INFO link. To call the customer back now, click on the DIAL link. If you click on a record below to dial it, it will be removed from the list.",0,'',$VD_login); ?></font>
- <br />
+    <br />
 	<?php
 	if ($webphone_location == 'bar')
         {echo "<br /><img src=\"./images/"._QXZ("pixel.gif")."\" width=\"1px\" height=\"".$webphone_height."px\" /><br />\n";}
 	?>
+
+    <input type="text">
+    <input type="button">
 	<div class="scroll_callback_auto" id="CallLisT"></div>
 	
     <br /><font class="sh_text"> &nbsp;
