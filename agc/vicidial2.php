@@ -7086,7 +7086,8 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 						var CB_calls = all_CBs_array[0];
 						var loop_ct=0;
 						var conv_start=0;
-                        var CB_HTML = "<table width=\"100%\"><tr bgcolor=\"<?php echo $SCRIPT_COLOR ?>\"><td><font class=\"log_title\">#</font></td><td align=\"center\"><font class=\"log_title\">LEAD ID</font></td><td align=\"center\"><font class=\"log_title\">VENDOR LEAD COD</font></td><td align=\"center\"><font class=\"log_title\">PHONE CODE</font></td><td align=\"center\"><font class=\"log_title\">PHONE NUMBER</font></td><td align=\"center\"><font class=\"log_title\">CALL</font></td></tr>";
+                        var CB_HTML = "<table width=\"100%\"><tr bgcolor=\"<?php echo $SCRIPT_COLOR ?>\">
+                        <td><font class=\"log_title\">#</font></td><td align=\"center\"><font class=\"log_title\">LEAD ID</font></td><td align=\"center\"><font class=\"log_title\">LEAD NAME</font></td><td align=\"center\"><font class=\"log_title\">CALL</font></td></tr>";
 						
 						while (loop_ct < CB_calls)
 							{
@@ -7100,11 +7101,13 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 							var conv_ct = (loop_ct + conv_start);
 							var call_array = all_CBs_array[conv_ct].split("-!T-");
 							var lead_id = call_array[0];
-							var vendor_lead_code = call_array[1];
-							var phone_code = call_array[2];
-							var phone_number = call_array[3];
+							var lead_name = call_array[1].' '.call_array[2];
+							var vendor_lead_code = call_array[3];
+							var phone_code = call_array[4];
+							var phone_number = call_array[5];
 
-                            CB_HTML = CB_HTML + "<tr bgcolor=\"" + row_color + "\"> <td><font class=\"log_text_sm\">" + loop_ct + "</font></td><td align=\"right\"><font class=\"log_text_sm\">" + lead_id + "</td><td align=\"right\"><font class=\"log_text_sm\">" + vendor_lead_code + "</td><td align=\"right\"><font class=\"log_text_sm\">" + phone_code + "</font></td> <td align=\"right\"><font class=\"log_text_sm\">" + phone_number + "</font></td><td align=\"right\"><font class=\"log_text_sm\"><a href=\"#\" onclick=\"NeWManuaLDiaLCalLSubmiTPhone('NOW','YES','" + lead_id + "','" + vendor_lead_code + "','" + phone_code + "','" + phone_number + "');return false;\">DIAL</a>&nbsp;</font></td></tr>";
+                            CB_HTML = CB_HTML + "<tr bgcolor=\"" + row_color + "\"> <td><font class=\"log_text_sm\">" + loop_ct + "</font></td><td align=\"right\"><font class=\"log_text_sm\">" + lead_id + "</td><td align=\"right\"><font class=\"log_text_sm\">" + lead_name + "</td><td align=\"right\"><font class=\"log_text_sm\"><a href=\"#\" onclick=\"NeWManuaLDiaLCalLSubmiTPhone('NOW','YES','" + lead_id + "','" + vendor_lead_code + "','" + phone_code + "','" + phone_number + "');return false;\">DIAL</a>&nbsp;</font></td></tr>";
+							
 							}
 						CB_HTML = CB_HTML + "</table>";
 						document.getElementById("CallBacKsLisT").innerHTML = CB_HTML;
@@ -8040,14 +8043,13 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 		if (NMDclick=='YES')
 			{button_click_log = button_click_log + "" + SQLdate + "-----NeWManuaLDiaLCalLSubmiT---" + tempDiaLnow + "|";}
 		 if (waiting_on_dispo > 0)
-
-		//if (false)
 			{
 			alert_box("<?php echo _QXZ("System Delay, Please try again"); ?><BR><font size=1><?php echo _QXZ("code:"); ?>" + agent_log_id + " - " + waiting_on_dispo + "</font>");
 			}
 		else
 			{
-			hideDiv('NeWManuaLDiaLBox');
+			hideDiv('CallBacKsLisTBox');
+			//hideDiv('NeWManuaLDiaLBox');
 		//	document.getElementById("debugbottomspan").innerHTML = "DEBUG OUTPUT" + document.vicidial_form.MDPhonENumbeR.value + "|" + active_group_alias;
 
 			var sending_group_alias = 0;
@@ -8106,8 +8108,6 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 				// ManualDialNext('',,MDDiaLCodEform,,,,MDTypeform);
                 ManualDialNext("",MDLeadIDform,MDDiaLCodEform,MDPhonENumbeRform,MDLookuPLeaD,MDVendorLeadCode,sending_group_alias,MDTypeform);
 				// ManualDialNext('','',MDDiaLCodEform,MDPhonENumbeRform,MDLookuPLeaD,MDVendorLeadCode,'0');
-	 
-
 				}
 			}
 		}

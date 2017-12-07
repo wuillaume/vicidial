@@ -14794,7 +14794,7 @@ if ($ACTION == 'CalLBacKLisT')
 //KEISI
 if ($ACTION == 'CallLisNow')
 	{
-	$stmt = "SELECT lead_id,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` limit 10;";
+	$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` limit 10;";
 	
 	if ($DB) {
 		echo "$stmt\n";
@@ -14814,7 +14814,7 @@ if ($ACTION == 'CallLisNow')
 	while ($callbacks_count>$loop_count)
 		{
 		$row=mysqli_fetch_row($rslt);
-		$CBoutput = "$row[0]-!T-$row[1]-!T-$row[2]-!T-$row[3]";
+		$CBoutput = "$row[0]-!T-$row[1]-!T-$row[2]-!T-$row[3]-!T-$row[4]-!T-$row[5]";
 		echo "$CBoutput\n";
 		$loop_count++;
 		}
