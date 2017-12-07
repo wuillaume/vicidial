@@ -7086,8 +7086,7 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 						var CB_calls = all_CBs_array[0];
 						var loop_ct=0;
 						var conv_start=0;
-                        var CB_HTML = "<table width=\"100%\"><tr bgcolor=\"<?php echo $SCRIPT_COLOR ?>\">
-                        <td><font class=\"log_title\">#</font></td><td align=\"center\"><font class=\"log_title\">LEAD ID</font></td><td align=\"center\"><font class=\"log_title\">LEAD NAME</font></td><td align=\"center\"><font class=\"log_title\">CALL</font></td></tr>";
+                        var CB_HTML = "<table width=\"100%\"><tr bgcolor=\"<?php echo $SCRIPT_COLOR ?>\"><td><font class=\"log_title\">#</font></td><td align=\"center\"><font class=\"log_title\">LEAD ID</font></td><td align=\"center\"><font class=\"log_title\">LEAD NAME</font></td><td align=\"center\"><font class=\"log_title\">CALL</font></td></tr>";
 						
 						while (loop_ct < CB_calls)
 							{
@@ -7101,7 +7100,7 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 							var conv_ct = (loop_ct + conv_start);
 							var call_array = all_CBs_array[conv_ct].split("-!T-");
 							var lead_id = call_array[0];
-							var lead_name = call_array[1].' '.call_array[2];
+							var lead_name = call_array[1] +" " +call_array[2];
 							var vendor_lead_code = call_array[3];
 							var phone_code = call_array[4];
 							var phone_number = call_array[5];
