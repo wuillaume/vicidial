@@ -7118,15 +7118,22 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 	}
 
 
+
+//keisi
 function CallListPhoneSearch(type)
 		{
         var lead ="" ;
+        var leadFirstName ="" ;
+        var leadLastName ="" ;
 
         if (type =="Id"){
 			lead = document.getElementById('txtlead').value;
         }else {
-			lead = document.getElementById('txtleadName').value;
+			leadFirstName = document.getElementById('txtleadFirstName').value;
+			leadLastName = document.getElementById('txtleadLastName').value;
+            lead =leadFirstName + " " +leadLastName;
         }
+
 
 		var move_on=1;
 
@@ -18396,6 +18403,7 @@ $zi=2;
 <a href="#" onclick="CallListPhone();return false;"><?php echo _QXZ("Try"); ?></a>
 <!-- ZZZZZZZZZZZZ  action links  agregado por keisi fin -->
 
+
 <span id="CallLogButtons"><font class="body_text"><span id="CallLogLinkSpan"><a href="#" onclick="VieWCalLLoG();return false;"><?php echo _QXZ("VIEW CALL LOG"); ?></a></span><br /></font></span>
 </span>
 
@@ -19013,13 +19021,13 @@ if ($agent_display_dialable_leads > 0)
 	if ($webphone_location == 'bar')
         {echo "<br /><img src=\"./images/"._QXZ("pixel.gif")."\" width=\"1px\" height=\"".$webphone_height."px\" /><br />\n";}
 	?>
-
+    SEARCH ID LEAD:
     <input type="text" placeholder="write the led code" id ="txtlead">
     <input type="button" value="SEARCH" onclick="CallListPhoneSearch('Id');return false;"> 
-
-    
-
-    <input type="text" placeholder="write the led Last Name" id ="txtleadName">
+    <br/>
+    SEARCH FIRST NAME LEAD:
+    <input type="text" placeholder="write the led First Name" id ="txtleadFirstName">
+    <input type="text" placeholder="write the led Last Name" id ="txtleadLastName">
     <input type="button" value="SEARCH" onclick="CallListPhoneSearch('Name');return false;"> 
 
 	<div class="scroll_callback_auto" id="CallLisT"></div>

@@ -446,6 +446,7 @@ if (isset($_GET["user"]))						{$user=$_GET["user"];}
 //keisi
 if (isset($_GET["lead"]))						{$lead=$_GET["lead"];}
 	elseif (isset($_POST["lead"]))				{$lead=$_POST["lead"];}
+
 if (isset($_GET["typeLead"]))						{$typeLead=$_GET["typeLead"];}
 	elseif (isset($_POST["typeLead"]))				{$typeLead=$_POST["typeLead"];}	
 //keisi
@@ -14813,7 +14814,7 @@ if ($ACTION == 'CallLisNow')
 
 			$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where lead_id = $lead;";
 	}else {
-			$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where concat(`first_name`,' ', `last_name`)= $lead;";
+			$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where concat_ws(' ',first_name,last_name ) like '"$lead"';";
 	}
 
 	if ($DB) {
