@@ -34932,31 +34932,35 @@ if ($ADD==1000000)
 	echo "<img src=\"images/icon_black_scripts.png\" alt=\"Scripts\" width=42 height=42> "._QXZ("ADD LIST TO AGENTS").":\n";
     echo "<br/>";
     echo "<br/>";
+    echo "select user: "
     echo "<select>";	
 	while ($scripts_to_print > $o) 
 		{
 		$row=mysqli_fetch_row($rslt);
-		echo  "<option value='$row[0]'>$row[1]</option>";
+		echo  "<option value='$row[0]'>$row[0] - $row[1]</option>";
 		$o++;
 		}
 	echo  "</select>";
+	echo  "<br/>";
 	echo  "<br/>";
     
     $o=0;
     $stmt="SELECT list_id, list_name FROM `vicidial_lists`  where active = 'Y' ORDER BY list_id asc;";
 	$rslt=mysql_to_mysqli($stmt, $link);
 	$scripts_to_print = mysqli_num_rows($rslt);
+    echo "select List: "
     echo "<select>";
 	$o=0;
 	while ($scripts_to_print > $o) 
 		{
 		$row=mysqli_fetch_row($rslt);
-		echo  "<option value='$row[0]'>$row[1]</option>";
+		echo  "<option value='$row[0]'>$row[0] - $row[1]</option>";
 		$o++;
 		}
-
+	echo "<br/>";
+    echo "<br/>";
+    echo "<input type='Button' value='SUBMIT'";
 	}
-
 
 
 ######################
