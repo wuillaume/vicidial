@@ -34933,7 +34933,7 @@ if ($ADD==1000000)
     echo "<br/>";
     echo "<br/>";
     echo "select user: ";
-    echo "<select>";	
+    echo "<select id ='cboAgent'>";	
 	while ($scripts_to_print > $o) 
 		{
 		$row=mysqli_fetch_row($rslt);
@@ -34949,7 +34949,7 @@ if ($ADD==1000000)
 	$rslt=mysql_to_mysqli($stmt, $link);
 	$scripts_to_print = mysqli_num_rows($rslt);
     echo "select List: ";
-    echo "<select>";
+    echo "<select id ='cboList'>";
 	$o=0;
 	while ($scripts_to_print > $o) 
 		{
@@ -34959,8 +34959,33 @@ if ($ADD==1000000)
 		}
 	echo "<br/>";
     echo "<br/>";
-    echo "<input type='Button' value='SUBMIT'";
+    echo "<input type='Button' value='SUBMIT' onClick=insertAgents();return false;";
 	}
+
+
+echo "<script>";
+echo "function insertAgents() {";
+echo "        if (window.XMLHttpRequest) {";
+echo "           xmlhttp = new XMLHttpRequest();";
+echo "        } else {";
+echo "           xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');";
+echo "       }";
+
+echo "       xmlhttp.onreadystatechange = function() {";
+echo "           if (this.readyState == 4 && this.status == 200) {";
+echo "             alert(this.response)";
+echo "          }";
+echo "       };";
+echo " var cboAgent = document.getElementById('cboAgent');";
+echo " var idAgent = cboAgent.options[cboAgent.selectedIndex].value;";
+
+echo " var cboList = document.getElementById('cboList');";
+echo " var idList = cboAgent.options[cboAgent.selectedIndex].value;";
+
+echo "       xmlhttp.open('GET','getuser.php?accion=insertAgents & idAgent=' +idAgent + '&idList=' + idList ,true);";
+echo "       xmlhttp.send();";
+echo "   }";
+echo "</script>";
 
 
 ######################
