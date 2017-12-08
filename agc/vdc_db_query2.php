@@ -14812,13 +14812,44 @@ if ($ACTION == 'CalLBacKLisT')
 	  
 	 	}
 }*/
-//KEISI
+//keisi
+
 if ($ACTION == 'CallLisNow')
+	{
+    $stmt = "SELECT  c.lead_id,c.first_name, c.last_name,c.vendor_lead_code,c.phone_code,c.phone_number FROM vicidial_list_manual_dial a inner join vicidial_users b on a.user_id = b.user_id inner join vicidial_list c ON a.list_id = c.list_id where b.user = $user;";
+	if ($DB) {
+		echo "$stmt\n";
+	}
+	    $rslt=mysql_to_mysqli($stmt, $link);
+
+		if ($mel > 0) {
+			mysql_error_logging($NOW_TIME,$link,$mel,$stmt,'00178',$user,$server_ip,$session_name,$one_mysql_log);
+		}
+		if ($rslt) {
+		$callbacks_count = mysqli_num_rows($rslt);
+        }
+
+	echo "$callbacks_count\n";
+
+	$loop_count=0;
+	while ($callbacks_count>$loop_count)
+		{
+		$row=mysqli_fetch_row($rslt);
+		$CBoutput = "$row[0]-!T-$row[1]-!T-$row[2]-!T-$row[3]-!T-$row[4]-!T-$row[5]";
+		echo "$CBoutput\n";
+		$loop_count++;
+		}
+	}
+
+
+//KEISI
+if ($ACTION == 'CallLisNowFilter')
 	{
     $stmt;
 	if ($typeLead=="Id"){
-		$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where lead_id = $lead;";
-	}else {
+     $stmt = "SELECT  c.lead_id,c.first_name, c.last_name,c.vendor_lead_code,c.phone_code,c.phone_number FROM vicidial_list_manual_dial a inner join vicidial_users b on a.user_id = b.user_id inner join vicidial_list c ON a.list_id = c.list_id where b.user = $user and c.lead_id = $lead;";
+	//$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where lead_id = $lead;";
+	} else  if ($typeLead=="Name"){
  	 if (!empty($leadFirstName)  && !empty($leadLastName)){
  		$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where  first_name='$leadFirstName'  and  last_name ='$leadLastName';"; 
      }else if (!empty($leadFirstName)  &&   empty($leadLastName)){

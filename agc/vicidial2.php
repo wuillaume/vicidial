@@ -7044,35 +7044,7 @@ function set_length(SLnumber,SLlength_goal,SLdirection)
 
 //################################################################################3
 //nueva funcion modificada KEISI
-
-function CallListPhone()
-		{
-		var move_on=1;
-		if ( (AutoDialWaiting == 1) || (VD_live_customer_call==1) || (alt_dial_active==1) || (MD_channel_look==1) || (in_lead_preview_state==1) )
-			{
-			if ( (auto_pause_precall == 'Y') && ( (agent_pause_codes_active=='Y') || (agent_pause_codes_active=='FORCE') ) && (AutoDialWaiting == 1) && (VD_live_customer_call!=1) && (alt_dial_active!=1) && (MD_channel_look!=1) && (in_lead_preview_state!=1) )
-				{
-				agent_log_id = AutoDial_ReSume_PauSe("VDADpause",'','','','','1',auto_pause_precall_code);
-				}
-			else
-				{
-				move_on=0;
-				alert_box("YOU MUST BE PAUSED TO CHECK CALLBACKS IN AUTO-DIAL MODE");
-				}
-			}
-		if (move_on == 1)
-			{
-			LastCallbackViewed=1;
-			showDiv('CallLisTPhoneBox');
-		    var CB_HTML = "<table width=\"100%\"><tr bgcolor=\"<?php echo $SCRIPT_COLOR ?>\"><td><font class=\"log_title\">#</font></td><td align=\"center\"><font class=\"log_title\">LEAD ID</font></td><td align=\"center\"><font class=\"log_title\">FIRST NAME</font></td><td align=\"center\"><font class=\"log_title\">LAST NAME</font></td><td align=\"center\"><font class=\"log_title\">CALL</font></td></tr>";
-		    CB_HTML = CB_HTML + "</table>";
-		    document.getElementById("CallLisT").innerHTML = CB_HTML;
-		}
-	}
-
-
-
-	/*function CallListPhone()
+	function CallListPhone()
 		{
 		var move_on=1;
 		if ( (AutoDialWaiting == 1) || (VD_live_customer_call==1) || (alt_dial_active==1) || (MD_channel_look==1) || (in_lead_preview_state==1) )
@@ -7142,7 +7114,7 @@ function CallListPhone()
 				}
 			}
 		}
-	}*/
+	}
 
 //keisi
 function CallListPhoneSearch(type)
@@ -7150,13 +7122,10 @@ function CallListPhoneSearch(type)
         var lead ="" ;
         var leadFirstName ="" ;
         var leadLastName ="" ;
-
-        if (type =="Id"){
-			lead = document.getElementById('txtlead').value;
-        }else {
-			leadFirstName = document.getElementById('txtleadFirstName').value;
-			leadLastName = document.getElementById('txtleadLastName').value;
-        }
+        lead = document.getElementById('txtlead').value;
+		leadFirstName = document.getElementById('txtleadFirstName').value;
+		leadLastName = document.getElementById('txtleadLastName').value;
+       
 
 		var move_on=1;
 
@@ -7183,7 +7152,7 @@ function CallListPhoneSearch(type)
 				}
 			if (xmlhttp) 
 				{ 
-				var CBlist_query = "server_ip=" + server_ip + "&session_name=" + session_name + "&user=" + user + "&pass=" + pass + "&ACTION=CallLisNow&campaign=" + campaign + "&lead=" + lead+ "&leadFirstName=" + leadFirstName +"&leadLastName=" + leadLastName + "&typeLead=" + type +   "&format=text";
+				var CBlist_query = "server_ip=" + server_ip + "&session_name=" + session_name + "&user=" + user + "&pass=" + pass + "&ACTION=CallLisNowFilter&campaign=" + campaign + "&lead=" + lead+ "&leadFirstName=" + leadFirstName +"&leadLastName=" + leadLastName + "&typeLead=" + type +   "&format=text";
 				xmlhttp.open('POST', 'vdc_db_query2.php'); 
 				xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
 				xmlhttp.send(CBlist_query); 
@@ -19052,11 +19021,9 @@ if ($agent_display_dialable_leads > 0)
     <input type="text" placeholder="write the led First Name" id ="txtleadFirstName">
     <input type="text" placeholder="write the led Last Name" id ="txtleadLastName">
     <input type="button" value="SEARCH" onclick="CallListPhoneSearch('Name');return false;"> 
-
 	<div class="scroll_callback_auto" id="CallLisT"></div>
-	
     <br /><font class="sh_text"> &nbsp;
-	<a href="#" onclick="CallListPhoneSearch();return false;"><?php echo _QXZ("Refresh"); ?></a>
+	<a href="#" onclick="CallListPhone();return false;"><?php echo _QXZ("Refresh"); ?></a>
 	 &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; 
 	<a href="#" onclick="CalLPhoneLisTClose();return false;"><?php echo _QXZ("Go Back"); ?></a>
 	</font>
