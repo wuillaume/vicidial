@@ -14819,19 +14819,22 @@ if ($ACTION == 'CallLisNow')
 	if ($typeLead=="Id"){
 		$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where lead_id = $lead;";
 	}else {
- 	if (!empty($leadFirstName)  && !empty($leadLastName)){
+ 	 if (!empty($leadFirstName)  && !empty($leadLastName)){
  		$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where  first_name='$leadFirstName'  and  last_name ='$leadLastName';"; 
-     }else if (empty($leadFirstName)){
-     	$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where first_name = '$leadLastName' ;";
-     }else if (empty($leadLastName)){
-        $stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where last_name  = '$leadFirstName' ;"; 
-     }else if (empty($leadFirstName)  && empty($leadLastName)){
+     }else{
      	echo '<script language="javascript>';
-        echo 'alery("Write")';
+        echo 'alert("Write")';
         echo '</script>';
         break;
      }
+     if (empty($leadLastName)){
+	 	$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where last_name  = '$leadFirstName' ;"; 	 	
+     }else if (empty($leadFirstName)){
+        $stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where first_name = '$leadLastName' ;";
+     } 
+     }
 	}
+	
 	if ($DB) {
 		echo "$stmt\n";
 	}
