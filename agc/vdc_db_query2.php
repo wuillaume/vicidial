@@ -14812,8 +14812,6 @@ if ($ACTION == 'CalLBacKLisT')
 	  
 	 	}
 }*/
-
-
 //KEISI
 if ($ACTION == 'CallLisNow')
 	{
@@ -14825,12 +14823,14 @@ if ($ACTION == 'CallLisNow')
      	$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where first_name = '$leadLastName' ;";
      }else if ($leadLastName==""){
         $stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where last_name  = '$leadFirstName' ;"; 
-     }else if ($leadFirstName=="" && $leadLastName==""){
-        echo"<script>alert('Writer First Name of Last Name')</script>"
+     }else if ($leadFirstName == "" && $leadLastName =""){
+     	echo '<script language="javascript>';
+        echo 'alery("Writer")';
+        echo '</script>';
+        break;
      }
      $stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where  first_name='$leadFirstName'  and  last_name ='$leadLastName';"; 
 	}
-
 	if ($DB) {
 		echo "$stmt\n";
 	}
@@ -14854,7 +14854,6 @@ if ($ACTION == 'CallLisNow')
 		$loop_count++;
 		}
 	}
-
 
 ################################################################################
 ### CalLBacKCounT - send the count of the USERONLY callbacks for an agent
