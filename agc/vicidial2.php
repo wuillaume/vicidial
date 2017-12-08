@@ -7064,7 +7064,7 @@ function CallListPhone()
 			{
 			LastCallbackViewed=1;
 			showDiv('CallLisTPhoneBox');
-			var CB_HTML = "<table width=\"100%\"><tr bgcolor=\"<?php echo $SCRIPT_COLOR ?>\"><td><font class=\"log_title\">#</font></td><td align=\"center\"><font class=\"log_title\">LEAD ID</font></td><td align=\"center\"><font class=\"log_title\">LEAD NAME</font></td><td align=\"center\"><font class=\"log_title\">CALL</font></td></tr>";
+		    var CB_HTML = "<table width=\"100%\"><tr bgcolor=\"<?php echo $SCRIPT_COLOR ?>\"><td><font class=\"log_title\">#</font></td><td align=\"center\"><font class=\"log_title\">LEAD ID</font></td><td align=\"center\"><font class=\"log_title\">FIRST NAME</font></td><td align=\"center\"><font class=\"log_title\">LAST NAME</font></td><td align=\"center\"><font class=\"log_title\">CALL</font></td></tr>";
 		    CB_HTML = CB_HTML + "</table>";
 		    document.getElementById("CallLisT").innerHTML = CB_HTML;
 		}
