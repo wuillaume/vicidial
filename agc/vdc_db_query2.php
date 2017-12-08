@@ -14822,9 +14822,9 @@ if ($ACTION == 'CallLisNow')
  	 if (!empty($leadFirstName)  && !empty($leadLastName)){
  		$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where  first_name='$leadFirstName'  and  last_name ='$leadLastName';"; 
      }else if (!empty($leadFirstName)  &&   empty($leadLastName)){
-	 	$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where last_name  = '$leadFirstName' ;"; 	 	
+	 	$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where first_name  = '$leadFirstName' ;"; 	 	
      }else if (!empty($leadLastName) && empty($leadFirstName)){
-        $stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where first_name = '$leadLastName' ;";
+        $stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where last_name = '$leadLastName' ;";
      }else{
 		break;
      } 
