@@ -14851,11 +14851,14 @@ if ($ACTION == 'CallLisNowFilter')
 	//$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where lead_id = $lead;";
 	} else  if ($typeLead=="Name"){
  	 if (!empty($leadFirstName)  && !empty($leadLastName)){
- 		$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where  first_name='$leadFirstName'  and  last_name ='$leadLastName';"; 
+ 		$stmt = "SELECT  c.lead_id,c.first_name, c.last_name,c.vendor_lead_code,c.phone_code,c.phone_number FROM vicidial_list_manual_dial a inner join vicidial_users b on a.user_id = b.user_id inner join vicidial_list c ON a.list_id = c.list_id where b.user = $user and c.first_name = '$leadFirstName' and c.last_name = '$leadLastName';";
+ 		//$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where  first_name='$leadFirstName'  and  last_name ='$leadLastName';"; 
      }else if (!empty($leadFirstName)  &&   empty($leadLastName)){
-	 	$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where first_name  = '$leadFirstName' ;"; 	 	
+	    $stmt = "SELECT  c.lead_id,c.first_name, c.last_name,c.vendor_lead_code,c.phone_code,c.phone_number FROM vicidial_list_manual_dial a inner join vicidial_users b on a.user_id = b.user_id inner join vicidial_list c ON a.list_id = c.list_id where b.user = $user and c.first_name = '$leadFirstName';";
+	 	//$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where first_name  = '$leadFirstName' ;"; 	 	
      }else if (!empty($leadLastName) && empty($leadFirstName)){
-        $stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where last_name = '$leadLastName' ;";
+        $stmt = "SELECT  c.lead_id,c.first_name, c.last_name,c.vendor_lead_code,c.phone_code,c.phone_number FROM vicidial_list_manual_dial a inner join vicidial_users b on a.user_id = b.user_id inner join vicidial_list c ON a.list_id = c.list_id where b.user = $user and c.last_name = '$leadLastName';";   
+        //$stmt = "SELECT lead_id,first_name, last_name,vendor_lead_code,phone_code,phone_number FROM `vicidial_list` where last_name = '$leadLastName' ;";
      }else{
 		break;
      } 

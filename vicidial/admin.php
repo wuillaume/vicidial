@@ -34914,6 +34914,51 @@ if ($ADD==1000000)
 	}
 
 
+
+//**keisi
+	if ($ADD==999)
+	{
+	echo "<TABLE><TR><TD>\n";
+	echo "<FONT FACE=\"ARIAL,HELVETICA\" COLOR=BLACK SIZE=2>";
+    $stmt=""; 
+    $rslt =""; 
+	$scripts_to_print="";
+    $o=0;
+
+	$stmt="SELECT user_id,full_name FROM `vicidial_users` where active ='Y' order by full_name;";
+	$rslt=mysql_to_mysqli($stmt, $link);
+	$scripts_to_print = mysqli_num_rows($rslt);
+
+	echo "<img src=\"images/icon_black_scripts.png\" alt=\"Scripts\" width=42 height=42> "._QXZ("ADD LIST TO AGENTS").":\n";
+    echo "<br/>";
+    echo "<br/>";
+    echo "<select>";	
+	while ($scripts_to_print > $o) 
+		{
+		$row=mysqli_fetch_row($rslt);
+		echo  "<option value='$row[0]'>$row[1]</option>";
+		$o++;
+		}
+	echo  "</select>";
+	echo  "<br/>";
+    
+    $o=0;
+    $stmt="SELECT list_id, list_name FROM `vicidial_lists`  where active = 'Y' ORDER BY list_id asc;";
+	$rslt=mysql_to_mysqli($stmt, $link);
+	$scripts_to_print = mysqli_num_rows($rslt);
+    echo "<select>";
+	$o=0;
+	while ($scripts_to_print > $o) 
+		{
+		$row=mysqli_fetch_row($rslt);
+		echo  "<option value='$row[0]'>$row[1]</option>";
+		$o++;
+		}
+
+	}
+
+
+
 ######################
 # ADD=10000000 display all filters
 ######################
@@ -36620,7 +36665,7 @@ if ($ADD==999999)
 		echo "<TABLE><TR><TD>\n";
 		echo "<FONT FACE=\"ARIAL,HELVETICA\" COLOR=BLACK SIZE=2>";
 
-		$stmt="SELECT server_id,server_description,server_ip,active,sysload,channels_total,cpu_idle_percent,disk_usage,active_agent_login_server,active_asterisk_server from servers order by server_id;";
+	    $stmt="SELECT server_id,server_description,server_ip,active,sysload,channels_total,cpu_idle_percent,disk_usage,active_agent_login_server,active_asterisk_server from servers order by server_id;";
 		$rslt=mysql_to_mysqli($stmt, $link);
 		if ($DB) {echo "$stmt\n";}
 		$servers_to_print = mysqli_num_rows($rslt);
