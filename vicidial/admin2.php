@@ -34915,7 +34915,7 @@ if ($ADD==1000000)
 
 
 
-//**keisi
+ //keisi
 	if ($ADD==999)
 	{
 	echo "<TABLE><TR><TD>\n";
@@ -34925,7 +34925,7 @@ if ($ADD==1000000)
 	$scripts_to_print="";
     $o=0;
 
-	$stmt="SELECT user_id,full_name FROM `vicidial_users` where active ='Y' order by full_name;";
+	$stmt="SELECT  user_id,full_name FROM `vicidial_users` where active ='Y' order by full_name;";
 	$rslt=mysql_to_mysqli($stmt, $link);
 	$scripts_to_print = mysqli_num_rows($rslt);
 
@@ -34973,11 +34973,11 @@ if ($ADD==1000000)
 	$scripts_to_print="";
     $o=0;
 
-	$stmt="SELECT b.user_id,b.full_name FROM vicidial_list_manual_dial a inner join vicidial_users b on a.user_id = b.user_id;";
+	$stmt="SELECT distinct b.user_id,b.full_name FROM vicidial_list_manual_dial a inner join vicidial_users b on a.user_id = b.user_id;";
 	$rslt=mysql_to_mysqli($stmt, $link);
 	$scripts_to_print = mysqli_num_rows($rslt);
 
-	echo "<img src=\"images/icon_black_scripts.png\" alt=\"Scripts\" width=42 height=42> "._QXZ("VIEW AGENTS").":\n";
+	echo "<img src=\"images/icon_black_scripts.png\" alt=\"Scripts\" width=42 height=42> "._QXZ("Agent").":\n";
     echo "<br/>";
     echo "<br/>";
     echo "select user: ";
@@ -35057,7 +35057,7 @@ function listAgent(str) {
  
 var datos ="accion=listAgent&idAgent="+str;
 xmlhttp.open('POST','getuser.php',true);
-xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+xmlhttp.setRequestHeader('Content-Type','application/json');
 xmlhttp.send(datos);
 
   }	
