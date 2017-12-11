@@ -34977,11 +34977,11 @@ if ($ADD==1000000)
 	$rslt=mysql_to_mysqli($stmt, $link);
 	$scripts_to_print = mysqli_num_rows($rslt);
 
-	echo "<img src=\"images/icon_black_scripts.png\" alt=\"Scripts\" width=42 height=42> "._QXZ("ADD LIST TO AGENTS").":\n";
+	echo "<img src=\"images/icon_black_scripts.png\" alt=\"Scripts\" width=42 height=42> "._QXZ("VIEW AGENTS").":\n";
     echo "<br/>";
     echo "<br/>";
     echo "select user: ";
-    echo "<select id ='cboAgent'  onchange='listAgent(this.value)>' ";	
+    echo "<select id ='cboAgent'  onchange='listAgent(this.value);' > ";	
 	while ($scripts_to_print > $o) 
 		{
 		$row=mysqli_fetch_row($rslt);
@@ -34990,12 +34990,11 @@ if ($ADD==1000000)
 		}
 	echo  "</select>";
 	echo  "<br/>";
-	echo  "<div id ='tableAgent'></div>";
+	echo  "<div id='tableAgent'></div>";
 	}
 
 ?>
 
-<!--keisi-->
 <script type="text/javascript">
 
 function insertAgents() {
@@ -35021,17 +35020,18 @@ xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; char
 xmlhttp.send(datos);
 }
 
+
 function listAgent(str) {
  if (str == "") {
     document.getElementById("tableAgent").innerHTML = "Sin Datos";
     return;
   }else{
-      if (window.XMLHttpRequest) {
+       if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();
-	   } else {
+      } else {
 		xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
-       }
-      xmlhttp.onreadystatechange = function() {
+      }
+	  xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
       var myObj = JSON.parse(this.responseText);
                 var table ="<h2>LIST OF AGENT</h2>";
