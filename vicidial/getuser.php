@@ -47,8 +47,8 @@ if ($accion =='insertAgents'){
         $array[] = array("id_listmanual"=>$data[0],"user_id"=>$data[1],"full_name"=>$data[2],"list_name"=>$data[3]);
 		$o++;
 		}
-    $myJSON = json_encode($array,true);
-    echo $myJSON;
+    $myJSON = json_encode($array);
+    echo json_decode( $myJSON);
 	
  }
 

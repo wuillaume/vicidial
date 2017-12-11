@@ -35057,7 +35057,7 @@ function listAgent(str) {
  
 var datos ="accion=listAgent&idAgent="+str;
 xmlhttp.open('POST','getuser.php',true);
-xmlhttp.setRequestHeader('Content-Type','application/json');
+xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
 xmlhttp.send(datos);
 
   }	
