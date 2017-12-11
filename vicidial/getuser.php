@@ -1,6 +1,5 @@
 <?php
 
-
 require_once("dbconnect_mysqli.php");
 
 $idAgent;

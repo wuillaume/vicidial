@@ -34962,31 +34962,40 @@ if ($ADD==1000000)
     echo "<input type='Button' value='SUBMIT' onClick=insertAgents();return false;";
 	}
 
+ 
 
-echo "<script>";
-echo "function insertAgents() {";
-echo "        if (window.XMLHttpRequest) {";
-echo "           xmlhttp = new XMLHttpRequest();";
-echo "        } else {";
-echo "           xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');";
-echo "       }";
 
-echo "       xmlhttp.onreadystatechange = function() {";
-echo "           if (this.readyState == 4 && this.status == 200) {";
-echo "             alert(this.response)";
-echo "          }";
-echo "       };";
-echo " var cboAgent = document.getElementById('cboAgent');";
-echo " var idAgent = cboAgent.options[cboAgent.selectedIndex].value;";
+?>
 
-echo " var cboList = document.getElementById('cboList');";
-echo " var idList = cboAgent.options[cboAgent.selectedIndex].value;";
+<!--keisi-->
+<script type='text/javascript'>
 
-echo "       xmlhttp.open('GET','getuser.php?accion=insertAgents & idAgent=' +idAgent + '&idList=' + idList ,true);";
-echo "       xmlhttp.send();";
-echo "   }";
-echo "</script>";
+function insertAgents() {
+  if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+   } else {
+		xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+   }
+xmlhttp.onreadystatechange = function() {
+if (this.readyState == 4 && this.status == 200) {
+		 alert(this.response);
+ }
+}
+var cboAgent = document.getElementById('cboAgent');
+var idAgent = cboAgent.options[cboAgent.selectedIndex].value;
+var cboList = document.getElementById('cboList');
+var idList = cboAgent.options[cboAgent.selectedIndex].value;
 
+xmlhttp.open('GET','getuser.php?accion=insertAgents & idAgent=' +idAgent + '&idList=' + idList ,true);
+xmlhttp.send();
+}
+
+</script>;
+
+
+
+
+<?php
 
 ######################
 # ADD=10000000 display all filters
