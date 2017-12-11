@@ -34959,7 +34959,7 @@ if ($ADD==1000000)
 		}
 	echo "<br/>";
     echo "<br/>";
-    echo "<input type='Button' value='SUBMIT' onClick='insertAgents();'";
+    echo "<input type='Button' value='SUBMIT' onClick='insertAgents();'>";
 	}
 
 
@@ -34977,7 +34977,7 @@ if ($ADD==1000000)
 	$rslt=mysql_to_mysqli($stmt, $link);
 	$scripts_to_print = mysqli_num_rows($rslt);
 
-	echo "<img src=\"images/icon_black_scripts.png\" alt=\"Scripts\" width=42 height=42> "._QXZ("Agent").":\n";
+	echo "<img src=\"images/icon_black_scripts.png\" alt=\"Scripts\" width=42 height=42> "._QXZ("list").":\n";
     echo "<br/>";
     echo "<br/>";
     echo "select user: ";
