@@ -19,6 +19,8 @@ if ($accion =='insertAgents'){
       $rslt=mysql_to_mysqli($stmt, $link);
 		if ($rslt) {
 			 echo "Agregado correctamente";
+		}else{
+			echo "Error al agregar";
 		}
  }
 

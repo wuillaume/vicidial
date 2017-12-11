@@ -34984,7 +34984,7 @@ if (this.readyState == 4 && this.status == 200) {
 var cboAgent = document.getElementById('cboAgent');
 var idAgent = cboAgent.options[cboAgent.selectedIndex].value;
 var cboList = document.getElementById('cboList');
-var idList = cboAgent.options[cboAgent.selectedIndex].value;
+var idList = cboList.options[cboList.selectedIndex].value;
 
 xmlhttp.open('GET','getuser.php?accion=insertAgents & idAgent=' +idAgent + '&idList=' + idList ,true);
 xmlhttp.send();
