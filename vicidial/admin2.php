@@ -34962,8 +34962,36 @@ if ($ADD==1000000)
     echo "<input type='Button' value='SUBMIT' onClick='insertAgents();'";
 	}
 
- 
 
+
+	if ($ADD==998)
+	{
+	echo "<TABLE><TR><TD>\n";
+	echo "<FONT FACE=\"ARIAL,HELVETICA\" COLOR=BLACK SIZE=2>";
+    $stmt=""; 
+    $rslt =""; 
+	$scripts_to_print="";
+    $o=0;
+
+	$stmt="SELECT b.user_id,b.full_name FROM vicidial_list_manual_dial a inner join vicidial_users b on a.user_id = b.user_id;";
+	$rslt=mysql_to_mysqli($stmt, $link);
+	$scripts_to_print = mysqli_num_rows($rslt);
+
+	echo "<img src=\"images/icon_black_scripts.png\" alt=\"Scripts\" width=42 height=42> "._QXZ("ADD LIST TO AGENTS").":\n";
+    echo "<br/>";
+    echo "<br/>";
+    echo "select user: ";
+    echo "<select id ='cboAgent'  onchange='listAgent(this.value)>' ";	
+	while ($scripts_to_print > $o) 
+		{
+		$row=mysqli_fetch_row($rslt);
+		echo  "<option value='$row[0]'>$row[0] - $row[1]</option>";
+		$o++;
+		}
+	echo  "</select>";
+	echo  "<br/>";
+	echo  "<div id ='tableAgent'></div>";
+	}
 
 ?>
 
@@ -34993,6 +35021,51 @@ xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; char
 xmlhttp.send(datos);
 }
 
+function listAgent(str) {
+ if (str == "") {
+    document.getElementById("tableAgent").innerHTML = "Sin Datos";
+    return;
+  }else{
+      if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	   } else {
+		xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+       }
+      xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+      var myObj = JSON.parse(this.responseText);
+                var table ="<h2>LIST OF AGENT</h2>";
+                    table+="<table border='1'>";
+                    table+="<tr>";
+                    table+="<td>id_listmanual</td>";
+                    table+="<td>user_id</td>";
+                    table+="<td>full_name</td>";
+                    table+="<td>list_name</td>";
+                    table+="</tr>";
+                    for (var index in myObj) {
+                           table+="<tr>";
+                           table+="<td>"+myObj[index].id_listmanual+"</td>";
+                           table+="<td>"+myObj[index].user_id+"</td>";
+                           table+="<td>"+myObj[index].full_name+"</td>";
+                           table+="<td>"+myObj[index].list_name+"</td>";
+                           table+="</tr>";
+                       }   
+                    table+="</table>";                
+	    document.getElementById("tableAgent").innerHTML =table;
+      }
+      }
+ 
+var datos ="accion=listAgent&idAgent="+str;
+xmlhttp.open('POST','getuser.php',true);
+xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+xmlhttp.send(datos);
+
+  }	
+
+}
+
+
+ 
 </script>
  
 <?php

@@ -29,6 +29,34 @@ if ($accion =='insertAgents'){
  }
 
 
+ if ($accion =='listAgent'){
+    $stmt = "SELECT a.id_listmanual ,b.user_id,b.full_name ,c.list_name FROM vicidial_list_manual_dial a
+			inner join vicidial_users b 
+			on a.user_id = b.user_id
+			inner join vicidial_lists c 
+			on a.list_id = c.list_id
+			where b.user_id = $idAgent";
+
+    $rslt=mysql_to_mysqli($stmt, $link);
+    $scripts_to_print = mysqli_num_rows($rslt);
+    $array =array();
+	$o=0;	
+		while ($scripts_to_print > $o) 
+		{
+		$row=mysqli_fetch_row($rslt);
+        $array[] = array("id_listmanual"=>$data[0],"user_id"=>$data[1],"full_name"=>$data[2],"list_name"=>$data[3]);
+		$o++;
+		}
+    $myJSON = json_encode($array);
+    echo $myJSON;
+	
+ }
+
+
+
+
+	 
+	
 
 
 ?>
