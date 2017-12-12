@@ -35041,6 +35041,7 @@ function listAgent(str) {
                     table+="<td>user_id</td>";
                     table+="<td>full_name</td>";
                     table+="<td>list_name</td>";
+                    table+="<td>delete</td>";
                     table+="</tr>";
                     for (var index in myObj) {
                            table+="<tr>";
@@ -35048,6 +35049,7 @@ function listAgent(str) {
                            table+="<td>"+myObj[index].user_id+"</td>";
                            table+="<td>"+myObj[index].full_name+"</td>";
                            table+="<td>"+myObj[index].list_name+"</td>";
+                           table+="<td><input type='button' value='delete'></td>";
                            table+="</tr>";
                        }   
                     table+="</table>";                
@@ -35059,7 +35061,6 @@ var datos ="accion=listAgent&idAgent="+str;
 xmlhttp.open('POST','getuser.php',true);
 xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
 xmlhttp.send(datos);
-
   }	
 
 }

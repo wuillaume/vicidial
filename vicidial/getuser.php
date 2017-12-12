@@ -44,12 +44,11 @@ if ($accion =='insertAgents'){
 		while ($scripts_to_print > $o) 
 		{
 		$row=mysqli_fetch_row($rslt);
-        $array[] = array("id_listmanual"=>$data[0],"user_id"=>$data[1],"full_name"=>$data[2],"list_name"=>$data[3]);
+        $array[] = array("id_listmanual"=>$row[0],"user_id"=>$row[1],"full_name"=>$row[2],"list_name"=>$row[3]);
 		$o++;
 		}
     $myJSON = json_encode($array);
-    echo json_decode( $myJSON);
-	
+    echo $myJSON ;
  }
 
 
