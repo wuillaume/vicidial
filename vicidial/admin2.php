@@ -34997,6 +34997,8 @@ if ($ADD==1000000)
 
 <script type="text/javascript">
 
+
+
 function insertAgents() {
   if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();
@@ -35014,11 +35016,32 @@ var cboList = document.getElementById('cboList');
 var idList = cboList.options[cboList.selectedIndex].value;
 
 
-var datos ="accion=insertAgents&idAgent="+idAgent+"&idList="+idList
+var datos ="accion=insertAgents&idAgent="+idAgent+"&idList="+idList ;
 xmlhttp.open('POST','getuser.php',true);
 xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
 xmlhttp.send(datos);
 }
+
+
+
+function deleteAgents(str) {
+  if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+   } else {
+		xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+   }
+xmlhttp.onreadystatechange = function() {
+if (this.readyState == 4 && this.status == 200) {
+		 alert(this.responseText);
+ }
+}
+
+var datos ="accion=deleteAgents&id="+str;
+xmlhttp.open('POST','getuser.php',true);
+xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+xmlhttp.send(datos);
+}
+
 
 
 function listAgent(str) {
@@ -35049,7 +35072,7 @@ function listAgent(str) {
                            table+="<td>"+myObj[index].user_id+"</td>";
                            table+="<td>"+myObj[index].full_name+"</td>";
                            table+="<td>"+myObj[index].list_name+"</td>";
-                           table+="<td><input type='button' value='delete'></td>";
+                           table+="<td><input type='button' value='delete' onClick='deleteAgents("+myObj[index].id_listmanual+");'></td>";
                            table+="</tr>";
                        }   
                     table+="</table>";                

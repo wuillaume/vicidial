@@ -4,10 +4,15 @@
 require_once("dbconnect_mysqli.php");
 require_once("functions.php");
 
+$id;
 $idAgent;
 $idList;
 $accion;
 ### If you have globals turned off uncomment these lines
+if (isset($_GET["id"]))						{$id=$_GET["id"];}
+	elseif (isset($_POST["id"]))				{$id=$_POST["id"];}
+
+
 if (isset($_GET["idAgent"]))						{$idAgent=$_GET["idAgent"];}
 	elseif (isset($_POST["idAgent"]))				{$idAgent=$_POST["idAgent"];}
 
@@ -22,11 +27,23 @@ if ($accion =='insertAgents'){
     $stmt = "INSERT INTO vicidial_list_manual_dial(user_id, list_id) VALUES ('$idAgent','$idList')";
     $rslt=mysql_to_mysqli($stmt, $link);
 		if ($rslt) {
-			 echo "Agregado correctamente";
+			 echo "save success";
 		}else{
-			   echo "error al agregar";
+			   echo "error save";
 		}
  }
+
+
+if ($accion =='deleteAgents'){
+    $stmt = "DELETE FROM vicidial_list_manual_dial  WHERE id_listmanual=$id";
+    $rslt=mysql_to_mysqli($stmt, $link);
+		if ($rslt) {
+			  echo "delete success";
+		}else{
+			   echo "error delete";
+		}
+ }
+
 
 
  if ($accion =='listAgent'){
